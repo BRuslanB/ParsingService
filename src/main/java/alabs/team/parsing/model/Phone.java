@@ -1,4 +1,4 @@
-package alabs.team.ParsingService.model;
+package alabs.team.parsing.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +22,7 @@ public class Phone {
     @Column(name = "phone")
     private String phone;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "office_id", nullable = false)
     private Office office;
 }

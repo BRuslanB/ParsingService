@@ -1,4 +1,4 @@
-package alabs.team.ParsingService.model;
+package alabs.team.parsing.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

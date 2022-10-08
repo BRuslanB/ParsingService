@@ -1,39 +1,37 @@
-package alabs.team.ParsingService.services.impl;
+package alabs.team.parsing.services.impl;
 
-import alabs.team.ParsingService.dto.OfficeDto;
-import alabs.team.ParsingService.model.Currency;
-import alabs.team.ParsingService.model.Office;
-import alabs.team.ParsingService.model.Phone;
-import alabs.team.ParsingService.repository.OfficeRepository;
-import alabs.team.ParsingService.services.OfficeService;
+import alabs.team.parsing.dto.OfficeDto;
+import alabs.team.parsing.model.Currency;
+import alabs.team.parsing.model.Office;
+import alabs.team.parsing.model.Phone;
+import alabs.team.parsing.repository.OfficeRepository;
+import alabs.team.parsing.services.OfficeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class OfficeServiceImpl implements OfficeService {
     private final OfficeRepository officeRepository;
 
+    public Office getOffice(Long id){
+        return officeRepository.findById(id).orElse(null);
+    }
+
     public List<OfficeDto> setOfficeDto(List<OfficeDto> officeDtoList) {
         // Check exist
-        Office officeCheck  = new Office();
         for (OfficeDto officeDto : officeDtoList) {
-            officeCheck = officeRepository.findById(officeDto.getId()).orElse(null);
+            Office officeCheck = getOffice(officeDto.getId());
             if (officeCheck != null) {
-                try {
-                    updateOfficeDto(officeDto);
-
-                } catch (Exception e) {
-                }
+                updateOfficeDto(officeDto);
             } else {
-                try {
-                    createOfficeDto(officeDto);
-                } catch (Exception e) {
-                }
+                createOfficeDto(officeDto);
             }
         }
         return officeDtoList;
@@ -55,26 +53,18 @@ public class OfficeServiceImpl implements OfficeService {
         }
         office.setPhoneSet(phoneSet);
         // Currency data
-        Currency currency = new Currency();
-        ArrayList<Currency> currencies = new ArrayList<>();
-        currency.setOffice(office);
-        if (officeDto.getData() != null) {
-            currency.setUsd_purchase(officeDto.getData().usd.get(0));
-            currency.setUsd_sale(officeDto.getData().usd.get(1));
-            currency.setEur_purchase(officeDto.getData().eur.get(0));
-            currency.setEur_sale(officeDto.getData().eur.get(1));
-            currency.setRub_purchase(officeDto.getData().rub.get(0));
-            currency.setRub_sale(officeDto.getData().rub.get(1));
-        }
-        currency.setTime_update(Timestamp.valueOf(LocalDateTime.now()));
-        currencies.add(currency);
-        Set<Currency> currencySet = new HashSet<Currency>(currencies); //добавляет только один элемент
+        Set<Currency> currencySet = new HashSet<Currency>();
+        currencySet.add(new Currency(null, officeDto.getData().usd.get(0), officeDto.getData().usd.get(1),
+                                      officeDto.getData().eur.get(0), officeDto.getData().eur.get(1),
+                                      officeDto.getData().rub.get(0), officeDto.getData().rub.get(1),
+                                      Timestamp.valueOf(LocalDateTime.now()), office));
         office.setCurrencySet(currencySet);
         // Save all data
         officeRepository.save(office);
     }
 
     @Override
+    @Transactional
     public void updateOfficeDto(OfficeDto officeDto) {
         // Main data
         Office office = officeRepository.findById(officeDto.getId()).orElseThrow();
@@ -83,19 +73,19 @@ public class OfficeServiceImpl implements OfficeService {
         office.setAddress(officeDto.getMainaddress());
         office.setCity(officeDto.getCity());
         // Phone List
-        Set<Phone> phoneSet = new HashSet<Phone>();
         for (String phoneDto : officeDto.getPhones()) {
-            phoneSet.add(new Phone(null,phoneDto,office));
+            Optional<Phone> phone = office.getPhoneSet().stream().filter(a -> a.getPhone().equals(phoneDto)).findFirst();
+            if (phone.isEmpty()) {
+                office.getPhoneSet().add(new Phone(null,phoneDto,office));
+            }
         }
-        if (office.getPhoneSet().isEmpty()){ //проблема здесь
-            office.setPhoneSet(phoneSet);
-        } else {
-            office.getPhoneSet().clear();
-            office.getPhoneSet().addAll(phoneSet);
-        }
+        Set<Phone> phoneSet = office.getPhoneSet().stream().collect(Collectors.toSet());
+        phoneSet.removeIf(a->!officeDto.getPhones().contains(a.getPhone()));
+        office.getPhoneSet().clear();
+        office.getPhoneSet().addAll(phoneSet);
         // Currency data
         Currency currency = new Currency();
-        ArrayList<Currency> currencies = new ArrayList<>();
+        ArrayList<Currency> currencyList = new ArrayList<>();
         currency.setOffice(office);
         if (officeDto.getData() != null){
             currency.setUsd_purchase(officeDto.getData().usd.get(0));
@@ -106,14 +96,9 @@ public class OfficeServiceImpl implements OfficeService {
             currency.setRub_sale(officeDto.getData().rub.get(1));
         }
         currency.setTime_update(Timestamp.valueOf(LocalDateTime.now()));
-        currencies.add(currency);
-        Set<Currency> currencySet = new HashSet<Currency>(currencies); //добавляет только один элемент
-        if (office.getCurrencySet().isEmpty()){ //проблема здесь
-            office.setCurrencySet(currencySet);
-        } else {
-            office.getCurrencySet().clear();
-            office.getCurrencySet().addAll(currencySet);
-        }
+        currencyList.add(currency);
+        office.getCurrencySet().clear();
+        office.getCurrencySet().addAll(currencyList);
         // Save all data
         officeRepository.save(office);
     }

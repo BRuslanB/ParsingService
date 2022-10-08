@@ -1,6 +1,6 @@
-package alabs.team.ParsingService.dto;
+package alabs.team.parsing.dto;
 
-import alabs.team.ParsingService.model.Data;
+import alabs.team.parsing.model.Data;
 import lombok.Getter;
 import lombok.Setter;
 

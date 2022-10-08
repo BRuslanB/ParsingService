@@ -1,7 +1,7 @@
-package alabs.team.ParsingService.rest;
+package alabs.team.parsing.rest;
 
-import alabs.team.ParsingService.dto.OfficeDto;
-import alabs.team.ParsingService.services.impl.OfficeServiceImpl;
+import alabs.team.parsing.dto.OfficeDto;
+import alabs.team.parsing.services.impl.OfficeServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

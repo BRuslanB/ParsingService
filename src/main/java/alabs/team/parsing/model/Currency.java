@@ -1,4 +1,4 @@
-package alabs.team.ParsingService.model;
+package alabs.team.parsing.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,7 +41,7 @@ public class Currency {
     @Column(name = "time_update")
     private Timestamp time_update;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "office_id", nullable = false)
     private Office office;
 }

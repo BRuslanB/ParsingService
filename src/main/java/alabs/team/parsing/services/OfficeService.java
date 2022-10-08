@@ -1,10 +1,12 @@
-package alabs.team.ParsingService.services;
+package alabs.team.parsing.services;
 
-import alabs.team.ParsingService.dto.OfficeDto;
+import alabs.team.parsing.dto.OfficeDto;
+import alabs.team.parsing.model.Office;
 
 import java.util.List;
 
 public interface OfficeService {
+    Office getOffice(Long id);
     List<OfficeDto> setOfficeDto(List<OfficeDto> officeDtoList);
 
     void createOfficeDto(OfficeDto officeDto);

@@ -4,27 +4,80 @@
     <meta charset="UTF-8">
     <title>DATA TO DB</title>
 </head>
-<body>
-    <br>
-    <button onclick="toSet()">SET DATA</button>
+<body onload="loadMain()">
 </body>
 <script type="text/javascript">
-      function toSet(){
-        var punkts = [{"id":10,"city":"\u0410\u043b\u043c\u0430\u0442\u044b","name":"TRUMP  \"\u0410\u041a\u0410\"","weight":"1","wholesale":true,"wholesale_text":"\u041e\u0422   5000 $","mainaddress":"\u0443\u043b. \u0410\u0443\u044d\u0437\u043e\u0432\u0430, 128, \u043d\u0438\u0436\u0435 \u0443\u043b. \u0413\u0430\u0431\u0434\u0443\u043b\u043b\u0438\u043d\u0430","gruppa":0,"address":"\u0443\u043b. \u0410\u0443\u044d\u0437\u043e\u0432\u0430, 128, \u043d\u0438\u0436\u0435 \u0443\u043b. \u0413\u0430\u0431\u0434\u0443\u043b\u043b\u0438\u043d\u0430","phone":"\u0412\u043e\u043e\u0440\u0443\u0436\u0435\u043d\u043d\u0430\u044f \u043e\u0445\u0440\u0430\u043d\u0430. \u041f\u0440\u0438\u043d\u0438\u043c\u0430\u0435\u043c \u0432\u0435\u0442\u0445\u0438\u0435, \u0441\u0442\u0438\u0440\u0430\u043d\u044b\u0435, \u0440\u0432\u0430\u043d\u044b\u0435 \u043a\u0443\u043f\u044e\u0440\u044b \u0434\u043e\u043b\u043b\u0430\u0440\u043e\u0432","phones":["+7 (727) 275-33-33","+7 (775) 452-75-75"],"date":1664718386,"bank":0,"data":{"USD":[476,480],"EUR":[464,469],"RUB":[7.15,7.5],"KGS":[5.3,5.8],"CNY":[63,70],"GBP":[510,570],"CHF":[0,0],"UZS":[0,0],"JPY":[0,0],"":[0,0],"AUD":[0,0],"TRY":[0,0],"AED":[0,0],"UAH":[0,0],"THB":[0,0],"INR":[0,0],"EGP":[0,0],"CAD":[0,0],"KPW":[0,0],"KRW":[0,0],"MNT":[0,0],"TMT":[0,0],"GEL":[0,0],"GOLD":[0,0],"AZN":[0,0],"BHD":[0,0],"AMD":[0,0],"BYN":[0,0],"BRL":[0,0],"HUF":[0,0],"HKD":[0,0],"DKK":[0,0],"IRR":[0,0],"KWD":[0,0],"MYR":[0,0],"MXN":[0,0],"MDL":[0,0],"NOK":[0,0],"PLN":[0,0],"SAR":[0,0],"XDR":[0,0],"SGD":[0,0],"TJS":[0,0],"CZK":[0,0],"SEK":[0,0],"ZAR":[0,0],"ILS":[0,0]},"gray":false,"actual":true,"actualTime":1664718386,"workmodes":{"mon":["9:00","20:00","",""],"tue":["9:00","20:00","",""],"wed":["9:00","20:00","",""],"thu":["9:00","20:00","",""],"fri":["9:00","20:00","",""],"sat":["9:00","20:00","",""],"sun":["9:00","20:00","",""],"holyday":["9:00","20:00","",""],"nonstop":false,"closed":false,"worknow":false},"mainsort":0},{"id":11,"city":"\u0410\u043b\u043c\u0430\u0442\u044b","name":"\u041a\u0430\u0440\u043b\u044b\u0433\u0430\u0448","weight":"1","wholesale":true,"wholesale_text":"","mainaddress":"\u0443\u043b. \u0422\u043e\u043b\u0435 \u0431\u0438, 232, \u0443\u0433. \u0443\u043b. \u0418.\u041a\u0430\u0440\u0438\u043c\u043e\u0432\u0430, \u0422\u0414 \"\u041f\u0440\u0430\u0433\u0430\"","gruppa":0,"address":"\u0443\u043b. \u0422\u043e\u043b\u0435 \u0431\u0438, 232, \u0443\u0433. \u0443\u043b. \u0418.\u041a\u0430\u0440\u0438\u043c\u043e\u0432\u0430, \u0422\u0414 \"\u041f\u0440\u0430\u0433\u0430\"","phone":"\u041a\u0443\u0440\u0441\u044b \u043e\u043f\u0442\u043e\u0432\u044b\u0435","phones":["+7 (727) 374-46-66","+7 (727) 250-34-89","+7 (778) 422-36-22"],"date":1664703013,"bank":0,"data":{"USD":[476,480],"EUR":[464,470],"RUB":[7.1,7.5],"KGS":[5.25,5.9],"CNY":[65,71],"GBP":[520,575],"CHF":[0,0],"UZS":[0,0],"JPY":[0,0],"":[0,0],"AUD":[0,0],"TRY":[0,0],"AED":[0,0],"UAH":[0,0],"THB":[0,0],"INR":[0,0],"EGP":[0,0],"CAD":[0,0],"KPW":[0,0],"KRW":[0,0],"MNT":[0,0],"TMT":[0,0],"GEL":[0,0],"GOLD":[0,0],"AZN":[0,0],"BHD":[0,0],"AMD":[0,0],"BYN":[0,0],"BRL":[0,0],"HUF":[0,0],"HKD":[0,0],"DKK":[0,0],"IRR":[0,0],"KWD":[0,0],"MYR":[0,0],"MXN":[0,0],"MDL":[0,0],"NOK":[0,0],"PLN":[0,0],"SAR":[0,0],"XDR":[0,0],"SGD":[0,0],"TJS":[0,0],"CZK":[0,0],"SEK":[0,0],"ZAR":[0,0],"ILS":[0,0]},"gray":false,"actual":false,"actualTime":1664703013,"workmodes":{"mon":["9:00","20:00","",""],"tue":["9:00","20:00","",""],"wed":["9:00","20:00","",""],"thu":["9:00","20:00","",""],"fri":["9:00","20:00","",""],"sat":["9:00","20:00","",""],"sun":["9:00","18:00","",""],"holyday":["9:00","18:00","",""],"nonstop":false,"closed":false,"worknow":false},"mainsort":0}];
-        var post = JSON.stringify(punkts);
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', "http://localhost:8000/api", true);
-        xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
-        xhr.send(post);
 
-        xhr.onload = function () {
-            if (xhr.status === 201 || xhr.status === 200) { //201-created
-                alert("You have successfully save!");
-                loadCourses();
-            } else {
-                alert("Error!");
-            }
+    function loadMain(){
+        try {
+            toGet();
+            setTimeout(function() {
+                location.reload();
+            }, 300000);  // 5мин = 300000
+        } catch (e) {
+            alert("Error application!")
         }
     }
+
+    function toGet() {
+        // alert("toGet:"); //для проверки вызова
+        const xhttp = new XMLHttpRequest();
+        this.responseType = "document";
+        var cont = "[]"; 
+ 
+        xhttp.onload = function() {
+            // console.log("get.status=" + this.status);
+            if (this.status === 200) { //200-ok
+                const result = this.responseText;
+                // console.log("result="+result);
+                if (result.includes('var punkts') && result.includes('var globalTown')) {
+                    var s1 = result.indexOf('var punkts');
+                    var s2 = result.indexOf('var globalTown');
+                    cont = result.substring(s1, s2);
+                    cont = cont.replaceAll('var punkts =', '');
+                    cont = cont.replaceAll(' ', '');
+                    cont = cont.replaceAll(';', '');
+                    //console.log("cont"+cont);
+                }
+            } else {
+               alert("Error load data!");
+            }
+            toPost(cont);
+        }
+ 
+        try {
+            xhttp.open("GET","https://kurs.kz/");
+            xhttp.send();
+        } catch (e) {
+            alert("Error access!")
+        }
+    }
+
+    function toPost(cont){
+        // alert("toPost:"); //для проверки вызова
+        //console.log(cont);
+        // var post = JSON.stringify(cont);
+        var post = cont; //уже пришел как json
+        var xhr = new XMLHttpRequest();
+        //console.log(post);
+
+        xhr.onload = function () {
+            // console.log("post.status=" + this.status);
+            if (this.status === 201 || this.status === 200) { //201-created
+                alert("You have successfully send!");
+            } else {
+                alert("Error send!");
+            }
+        }
+
+        try{
+            xhr.open('POST', "http://localhost:8000/api", true);
+            xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+            xhr.send(post);           
+        } catch (e) {
+            alert("Error conection!")
+        }
+    }
+
 </script>
 </html>
