@@ -14,6 +14,11 @@ import java.util.List;
 public class OfficeController {
     private final OfficeServiceImpl officeService;
 
+    @GetMapping
+    public List<OfficeDto> getAllOfficeDTO(){
+        return officeService.getAllOfficeDto();
+    }
+
     @PostMapping
     public List<OfficeDto> setOfficeDto(@RequestBody List<OfficeDto> officeDtoList){
         return officeService.setOfficeDto(officeDtoList);

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,6 +14,7 @@ public class OfficeDto {
     public String city;
     public String name;
     public String mainaddress;
-    public ArrayList<String> phones;
+    public Long date;
+    public List<String> phones;
     public Data data;
 }

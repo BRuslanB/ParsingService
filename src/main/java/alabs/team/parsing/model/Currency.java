@@ -38,9 +38,6 @@ public class Currency {
     @Column(name = "rub_sale")
     private double rub_sale;
 
-    @Column(name = "time_update")
-    private Timestamp time_update;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "office_id", nullable = false)
     private Office office;

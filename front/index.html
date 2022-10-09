@@ -3,24 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>DATA TO DB</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 </head>
 <body onload="loadMain()">
+    <div class="container mt-3" style="min-height: 600px;">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr style="font-size: smaller;">
+                            <th style="width: 20%;">Обменный пункт</th>
+                            <th style="text-align: center; width: 15%;">Время</th>
+                            <th style="text-align: center; width: 15%;">USD</th>
+                            <th style="text-align: center; width: 15%;">EUR</th>
+                            <th style="text-align: center; width: 15%;">RUB</th>
+                            <th style="width: 20%;">Телефон</th>
+                        </tr>
+                    </thead>
+                    <tbody id=tbodyOfficeList>
+                        <!--htmlCode-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+            crossorigin="anonymous">
+    </script>
 </body>
 <script type="text/javascript">
 
     function loadMain(){
         try {
-            toGet();
+            toPars();
             setTimeout(function() {
                 location.reload();
             }, 300000);  // 5мин = 300000
         } catch (e) {
-            alert("Error application!")
+            console.log("Error application!")
         }
     }
 
-    function toGet() {
-        // alert("toGet:"); //для проверки вызова
+    function toPars() {
+        // alert("toPars:"); //для проверки вызова
         const xhttp = new XMLHttpRequest();
         this.responseType = "document";
         var cont = "[]"; 
@@ -35,12 +62,12 @@
                     var s2 = result.indexOf('var globalTown');
                     cont = result.substring(s1, s2);
                     cont = cont.replaceAll('var punkts =', '');
-                    cont = cont.replaceAll(' ', '');
+                    //cont = cont.replaceAll(' ', '');
                     cont = cont.replaceAll(';', '');
                     //console.log("cont"+cont);
                 }
             } else {
-               alert("Error load data!");
+               console.log("Error load data!");
             }
             toPost(cont);
         }
@@ -49,7 +76,7 @@
             xhttp.open("GET","https://kurs.kz/");
             xhttp.send();
         } catch (e) {
-            alert("Error access!")
+            console.log("Error access!")
         }
     }
 
@@ -64,10 +91,11 @@
         xhr.onload = function () {
             // console.log("post.status=" + this.status);
             if (this.status === 201 || this.status === 200) { //201-created
-                alert("You have successfully send!");
+                console.log("You have successfully send!");
             } else {
-                alert("Error send!");
+                console.log("Error send!");
             }
+            toGet();     
         }
 
         try{
@@ -75,8 +103,57 @@
             xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
             xhr.send(post);           
         } catch (e) {
-            alert("Error conection!")
+            console.log("Error connection!")
         }
+    }
+
+    function toGet() {
+        // alert("toGet:"); //для проверки вызова
+        const xhttp = new XMLHttpRequest();
+
+        xhttp.onload = function(){
+            if (this.status === 200) { //200-ok
+                const result = this.responseText;
+                var officeList = JSON.parse(result);
+                // Проверка JSON.parse
+                // console.log(result);
+                // console.log(officeList);
+                // console.log(officeList.length);
+                var htmlCode = "";
+                    for (i = 0; i < officeList.length; i++) {
+                        htmlCode += "<tr style='font-size: x-small;'>";
+                            htmlCode += "<td style='width: 20%;'>" + 
+                                            "<span class='text-primary'>" + officeList[i]["name"] + "</span><br>";
+                            htmlCode += officeList[i]["mainaddress"] + "</td>";
+                            htmlCode += "<td style='text-align: center; width: 15%;'>" + 
+                                            timeConvert(officeList[i]["date"]) + "</td>";
+                            htmlCode += "<td style='text-align: center; width: 15%;'>" + 
+                                            officeList[i]["data"]["USD"][0] + " - " +
+                                         officeList[i]["data"]["USD"][1] + "</td>";
+                            htmlCode += "<td style='text-align: center; width: 15%;'>" + 
+                                            officeList[i]["data"]["EUR"][0] + " - " +
+                                         officeList[i]["data"]["EUR"][1] + "</td>";
+                            htmlCode += "<td style='text-align: center; width: 15%;'>" + 
+                                            officeList[i]["data"]["RUB"][0] + " - " +
+                                         officeList[i]["data"]["RUB"][1] + "</td>";
+                            htmlCode += "<td class='text-primary' style='width: 20%;'>"
+                            for (j = 0; j < officeList[i]["phones"].length; j++) {
+                                htmlCode += officeList[i]["phones"][j] + "<br>"
+                            }
+                            htmlCode += "</td>"
+                        htmlCode += "</tr>";
+                    }
+                //прорисовка tbodyOfficeList
+                tbodyOfficeList.innerHTML = htmlCode;
+            }
+        }
+        xhttp.open("GET","http://localhost:8000/api");
+        xhttp.send();
+    }
+
+    function timeConvert(num) { 
+        var date = new Date(num * 1000);
+        return date.toLocaleTimeString();
     }
 
 </script>
