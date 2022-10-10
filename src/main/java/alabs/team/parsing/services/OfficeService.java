@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface OfficeService {
     Office getOffice(Long id);
-    List<OfficeDto> getAllOfficeDto();
+    List<OfficeDto> getAllOfficeDto(String sort);
     List<OfficeDto> setOfficeDto(List<OfficeDto> officeDtoList);
     void createOfficeDto(OfficeDto officeDto);
     void updateOfficeDto(Office office, OfficeDto officeDto);

@@ -14,9 +14,9 @@ import java.util.List;
 public class OfficeController {
     private final OfficeServiceImpl officeService;
 
-    @GetMapping
-    public List<OfficeDto> getAllOfficeDTO(){
-        return officeService.getAllOfficeDto();
+    @GetMapping(value = "{sort}")
+    public List<OfficeDto> getAllOfficeDTO(@PathVariable(name="sort") String sort){
+        return officeService.getAllOfficeDto(sort);
     }
 
     @PostMapping

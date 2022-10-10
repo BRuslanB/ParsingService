@@ -10,7 +10,6 @@ import alabs.team.parsing.services.OfficeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -27,8 +26,13 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Override
-    public List<OfficeDto> getAllOfficeDto() {
-        List<Office> officeList = officeRepository.findAll();
+    public List<OfficeDto> getAllOfficeDto(String sort) {
+        List<Office> officeList;
+        switch (sort) {
+            case ("asc") -> officeList = officeRepository.findAllOrderByDateAsc();
+            case ("desc") -> officeList = officeRepository.findAllOrderByDateDesc();
+            default -> officeList = officeRepository.findAll();
+        }
         List<OfficeDto> officeDtoList = new ArrayList<>();
         OfficeDto officeDto;
         for (Office office : officeList) {
@@ -100,7 +104,6 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Override
-//    @Transactional
     public void updateOfficeDto(Office office, OfficeDto officeDto) {
         // Main data
         office.setCity(officeDto.getCity());

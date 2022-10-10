@@ -9,12 +9,16 @@
 <body onload="loadMain()">
     <div class="container mt-3" style="min-height: 600px;">
         <div class="row">
-            <div class="col-12">
+            <div class="col-10 mx-auto">
                 <table class="table table-striped">
                     <thead>
                         <tr style="font-size: smaller;">
                             <th style="width: 20%;">Обменный пункт</th>
-                            <th style="text-align: center; width: 15%;">Время</th>
+                            <th style="text-align: center; width: 15%;">
+                                <button style="border: none; background: transparent;" onclick="toGet('asc')">&#9650</button>
+                                    Время
+                                <button style="border: none; background: transparent;" onclick="toGet('desc')">&#9660</button>
+                            </th>
                             <th style="text-align: center; width: 15%;">USD</th>
                             <th style="text-align: center; width: 15%;">EUR</th>
                             <th style="text-align: center; width: 15%;">RUB</th>
@@ -35,7 +39,7 @@
 </body>
 <script type="text/javascript">
 
-    function loadMain(){
+    function loadMain() {
         try {
             toPars();
             setTimeout(function() {
@@ -80,7 +84,7 @@
         }
     }
 
-    function toPost(cont){
+    function toPost(cont) {
         // alert("toPost:"); //для проверки вызова
         //console.log(cont);
         // var post = JSON.stringify(cont);
@@ -95,7 +99,7 @@
             } else {
                 console.log("Error send!");
             }
-            toGet();     
+            toGet("desc");     
         }
 
         try{
@@ -107,8 +111,8 @@
         }
     }
 
-    function toGet() {
-        // alert("toGet:"); //для проверки вызова
+    function toGet(sort) {
+        //alert("toGet:" + sort); //для проверки вызова
         const xhttp = new XMLHttpRequest();
 
         xhttp.onload = function(){
@@ -147,7 +151,7 @@
                 tbodyOfficeList.innerHTML = htmlCode;
             }
         }
-        xhttp.open("GET","http://localhost:8000/api");
+        xhttp.open("GET","http://localhost:8000/api/" + sort);
         xhttp.send();
     }
 
