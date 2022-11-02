@@ -1,7 +1,7 @@
 package alabs.team.parsing.rest;
 
 import alabs.team.parsing.dto.OfficeDto;
-import alabs.team.parsing.services.impl.OfficeServiceImpl;
+import alabs.team.parsing.services.OfficeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +12,7 @@ import java.util.List;
 @CrossOrigin
 @RequiredArgsConstructor
 public class OfficeController {
-    private final OfficeServiceImpl officeService;
+    private final OfficeService officeService;
 
     @GetMapping(value = "{sort}")
     public List<OfficeDto> getAllOfficeDTO(@PathVariable(name="sort") String sort){

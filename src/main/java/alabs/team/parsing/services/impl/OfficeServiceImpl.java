@@ -28,6 +28,7 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     public List<OfficeDto> getAllOfficeDto(String sort) {
         List<Office> officeList;
+        // Parameter sort
         switch (sort) {
             case ("asc") -> officeList = officeRepository.findAllOrderByDateAsc();
             case ("desc") -> officeList = officeRepository.findAllOrderByDateDesc();
