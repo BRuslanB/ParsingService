@@ -1,0 +1,44 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+
+# Ignore compiled class files
+*.class
+
+# Ignore application logs
+*.log
+
+# Ignore build directories
+/build/
+/target/
+
+# Ignore dependencies directories created by build tools (Maven, Gradle)
+.mvn/
+target/
+!.mvn/wrapper/maven-wrapper.jar
+.gradle/
+/build/
+
+# Ignore IDE configuration files (IntelliJ IDEA, Eclipse)
+*.iml
+.idea/
+*.ipr
+*.iws
+*.project
+*.classpath
+.settings/
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore personal configuration files
+*.env
+*.local
+*.swp
+
+# Ignore executable files
+*.exe
+*.dll
+*.so
+*.dylib
