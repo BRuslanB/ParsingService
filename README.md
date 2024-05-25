@@ -4,7 +4,8 @@ Note. This service was created as a test task for an internship at one of the IT
 
 ## Features
 The service allows you to receive and parse information from the public website https://kurs.kz/
-Parsing is carried out on the front side of the application every 5 minutes. You will find the page in the folder front\index.html
+Parsing is carried out on the front side of the application every 5 minutes. The main page you will find the page in the folder front\index.html
+
 ## Technologies Used
 The User Transaction Service is built using the following technologies:
 
@@ -13,6 +14,9 @@ The User Transaction Service is built using the following technologies:
 * Spring Data JPA
 * Hibernate
 * PostgreSQL
+* Javascript
+* Thymeleaf
+* Bootstrap
 
 ## Prerequisites
 Before running the Service, you will need to have the following software installed on your machine:
@@ -37,7 +41,7 @@ java -jar ./buld/libs/ParsingService-0.0.1-SNAPSHOT.jar
 ```
 4. Open the page.Temporarily disable CORS policy in your browser first.
 ``` 
-index.html
+front\index.html
 ``` 
 
 ## Contributing
