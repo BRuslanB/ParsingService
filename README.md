@@ -37,9 +37,13 @@ currency_db
 ```
 3. Build and run the Java application
 ```bash
-java -jar ./buld/libs/ParsingService-0.0.1-SNAPSHOT.jar
+java -jar ./build/libs/ParsingService-0.0.1-SNAPSHOT.jar
 ```
-4. Open the page.Temporarily disable CORS policy in your browser first.
+or for MS Windows
+```
+java -jar .\build\libs\ParsingService-0.0.1-SNAPSHOT.jar
+```
+4. Open the page. Temporarily disable CORS policy in your browser first (you can Google to see how your browser can do this.)
 ``` 
 front\index.html
 ``` 
